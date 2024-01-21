@@ -1,10 +1,10 @@
 package com.codegym.t2dshop.configuration;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@EnableAutoConfiguration
+@Configuration
 public class AppConfiguration {
 
     @Bean

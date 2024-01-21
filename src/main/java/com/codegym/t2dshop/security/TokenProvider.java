@@ -20,18 +20,18 @@ public class TokenProvider {
     private String jwtSecretKey;
 
     @Value("${app.jwtExpirationInMs}")
-    private String jwtExpirationInMs;
+    private int jwtExpirationInMs;
 
     public String generateToken(Authentication authentication) {
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         Date createdDate = new Date();
         Date expiryDate = new Date(createdDate.getTime() + jwtExpirationInMs);
-        return Jwts.builder()
-                   .setSubject(userPrincipal.getUsername())
-                   .setIssuedAt(createdDate)
+        String token = Jwts.builder()
+                   .setSubject(authentication.getName())
+                   .setIssuedAt(new Date())
                    .setExpiration(expiryDate)
                    .signWith(SignatureAlgorithm.HS512, jwtSecretKey)
                    .compact();
+        return token;
     }
 
     public String getUsernameFromJwt(String jwtString) {

@@ -16,7 +16,7 @@ public class UserPrincipal implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UserPrincipal create(User user) {
-        String roleName = user.getRole().toString();
+        String roleName = user.getRole().getName();
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         if (Optional.ofNullable(roleName).isPresent()) {
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(roleName);
