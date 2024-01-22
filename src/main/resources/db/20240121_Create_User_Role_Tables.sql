@@ -17,7 +17,7 @@ create table if not exists `user` (
    role_id int not null,
    username varchar(100) not null,
    password varchar(200) not null,
-   fullname varchar(100) not null,
+   full_name varchar(100) not null,
    email varchar(100) not null,
    address varchar(200) not null,
    phone varchar(12) not null,
@@ -29,7 +29,7 @@ create table if not exists `user` (
    constraint users_roles_fk foreign key (role_id) references `role` (id)
 );
 
-insert into `user` (role_id, username, password, fullname, email, address, phone, avatar, activated, remember_token) values
+insert into `user` (role_id, username, password, full_name, email, address, phone, avatar, activated, remember_token) values
 (1, 'daoadmin', '$2a$10$aXGQKNTdX9.5E9zI2o/1zOy1MFBmHZ8owc6RaXJR89ymzx.CoLSMC', 'Nguyễn Bá Minh Đạo', 'daonguyen.admin@gmail.com',
  'Hồ Chí Minh', '0908983906', 'avatar1.png', true, 'rAPHFeXDlQCjenQ6nffqe56hC9EulnyQTDKGzhuKjCIrVI4Cy0hWGEtsvJdA') -- password: Password1
 ,(2, 'tyuser', '$2a$10$oztyYOzexbKMwNQi.xfE4uOVjKByoNiuAHKO9zL83LMA0czAXtP3.', 'Nguyễn Văn Tý', 'tynguyen.user@gmail.com',
