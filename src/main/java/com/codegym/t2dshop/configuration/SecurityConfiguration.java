@@ -42,6 +42,11 @@ public class SecurityConfiguration {
     private AccessDeniedFilter accessDeniedFilter;
 
     @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
     public Filter authenticationFilter() {
         return new AuthFilter();
     }
@@ -68,7 +73,8 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         httpSecurity.authorizeHttpRequests(
-                req -> req.requestMatchers("/api/**", "/api/auth/login", "/api/auth/logout").permitAll());
+                req -> req.requestMatchers("/api/**", "/api/auth/login", "/api/auth/logout",
+                                            "/api/auth/register").permitAll());
 
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers("/api/roles/**").hasAnyRole("ADMIN"));
