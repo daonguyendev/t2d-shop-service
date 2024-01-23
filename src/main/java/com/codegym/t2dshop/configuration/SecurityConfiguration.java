@@ -21,9 +21,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -40,6 +37,11 @@ public class SecurityConfiguration {
 
     @Autowired
     private AccessDeniedFilter accessDeniedFilter;
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public Filter authenticationFilter() {
@@ -68,7 +70,12 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         httpSecurity.authorizeHttpRequests(
-                req -> req.requestMatchers("/api/**", "/api/auth/login","/api/categories/**", "/api/auth/logout").permitAll());
+
+                
+
+                req -> req.requestMatchers("/api/**", "/api/auth/login", "/api/auth/logout", "/api/categories/**",
+                                            "/api/auth/register").permitAll());
+
 
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers("/api/roles/**").hasAnyRole("ADMIN"));
