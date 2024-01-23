@@ -1,12 +1,10 @@
-create table if not exists category
-(
+create table if not exists category (
     id   int         not null auto_increment,
     name varchar(50) not null,
     constraint category_pk primary key (id)
 );
 
-create table if not exists size
-(
+create table if not exists size (
     id         int not null auto_increment,
     name       varchar(100),
     product_id int,
@@ -14,8 +12,7 @@ create table if not exists size
     constraint size_product_fk foreign key (product_id) references product (id)
 );
 
-create table if not exists color
-(
+create table if not exists color (
     id         int not null auto_increment,
     name       varchar(100),
     product_id int,
@@ -23,8 +20,7 @@ create table if not exists color
     constraint color_product_fk foreign key (product_id) references product (id)
 );
 
-create table if not exists product
-(
+create table if not exists product (
     id          int not null auto_increment,
     category_id int,
     name        varchar(100),
