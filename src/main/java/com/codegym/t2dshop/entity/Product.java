@@ -30,4 +30,6 @@ public class Product {
     private List<Size> sizes = new ArrayList<>();
     @OneToMany(mappedBy = "product")
     private List<Color> colors = new ArrayList<>();
+
+
 }

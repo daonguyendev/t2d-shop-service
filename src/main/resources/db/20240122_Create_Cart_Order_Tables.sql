@@ -1,4 +1,4 @@
-create table if not exists cart(
+create table if not exists cart (
     id int not null auto_increment,
     user_id int not null,
     status boolean,
@@ -6,18 +6,19 @@ create table if not exists cart(
     constraint users_fk foreign key (user_id) references `user` (id)
 );
 
-create table if not exists cart_item(
+create table if not exists cart_item (
     id int not null auto_increment,
     cart_id int not null,
     product_id int not null,
     quantity int not null,
     image_url varchar(255),
+    unit_price float,
     constraint cart_item_pk primary key (id),
     constraint cart_fk foreign key (cart_id) references cart(id),
     constraint product_fk foreign key (product_id) references product(id)
 );
 
-create table if not exists `order`(
+create table if not exists `order` (
     id int not null auto_increment,
     user_id int not null,
     total_amount int not null,
@@ -25,7 +26,7 @@ create table if not exists `order`(
     constraint user_fk foreign key (user_id) references `user` (id)
 );
 
-create table if not exists order_item(
+create table if not exists order_item (
     id int not null auto_increment,
     order_id int not null,
     product_id int not null,
