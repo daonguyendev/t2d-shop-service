@@ -33,7 +33,7 @@ public class RegisterServiceImpl implements RegisterService {
     public RegisterResponse register(RegisterRequest registerRequest) {
         UserDto userDto = registerRequest.getRegisterDto().getUserDto();
 
-        if (!isEmailOrPhoneExisted(userDto)) {
+        if (!isUserExisted(userDto)) {
             return new RegisterResponse("Register failed!", null);
         } else {
             User newUser = modelMapper.map(userDto, User.class);
@@ -53,7 +53,7 @@ public class RegisterServiceImpl implements RegisterService {
         }
     }
 
-    private boolean isEmailOrPhoneExisted(UserDto newUserDto) {
+    private boolean isUserExisted(UserDto newUserDto) {
         User currentUser = userRepository.findByUsername(newUserDto.getUsername()).orElse(null);
         return Optional.ofNullable(currentUser).isEmpty();
     }
