@@ -12,6 +12,7 @@ create table if not exists cart_item (
     product_id int not null,
     quantity int not null,
     image_url varchar(255),
+    unit_price float,
     constraint cart_item_pk primary key (id),
     constraint cart_fk foreign key (cart_id) references cart(id),
     constraint product_fk foreign key (product_id) references product(id)
