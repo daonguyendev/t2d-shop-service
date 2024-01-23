@@ -68,7 +68,7 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         httpSecurity.authorizeHttpRequests(
-                req -> req.requestMatchers("/api/**", "/api/auth/login", "/api/auth/logout").permitAll());
+                req -> req.requestMatchers("/api/**", "/api/auth/login","/api/categories/**", "/api/auth/logout").permitAll());
 
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers("/api/roles/**").hasAnyRole("ADMIN"));
