@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/categories")
@@ -29,12 +30,10 @@ public class CategoryController {
     @GetMapping("/{id}/products")
     public ResponseEntity<?> getProductsByCategoryId(@PathVariable Long id) {
         Category category = categoryService.getCategoryById(id);
-        if (category == null) {
-            System.out.println("getProductsByCategoryId null");
-            return ResponseEntity.notFound().build();
+        if (Optional.ofNullable(category.getProducts()).isPresent()) {
+            return new ResponseEntity<>(category, HttpStatus.OK);
         }
-        List<Product> products = category.getProducts();
-        return new ResponseEntity<>(products, HttpStatus.OK);
+        return new ResponseEntity<>(category, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/products/{categoryId}")
