@@ -25,7 +25,7 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer quantity;
-    private float unitPrice;
+    private Float unitPrice;
 
     @OneToOne
     @JoinColumn(name = "product_id")

@@ -22,7 +22,7 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean status;
+    private Boolean status;
 
     @OneToOne
     @JoinColumn(name = "user_id")
