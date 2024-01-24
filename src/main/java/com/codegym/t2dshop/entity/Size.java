@@ -1,14 +1,11 @@
 package com.codegym.t2dshop.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.parameters.P;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -21,8 +18,9 @@ public class Size {
     private Long id;
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
+    @JsonIgnore
     private Product product;
 
 

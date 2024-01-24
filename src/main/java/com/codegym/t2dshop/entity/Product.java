@@ -1,12 +1,12 @@
 package com.codegym.t2dshop.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,12 +22,16 @@ public class Product {
     private Double price;
     private String description;
     private Integer quantity;
+    private String image;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
+    @JsonIgnore
     private Category category;
+
     @OneToMany(mappedBy = "product")
     private List<Size> sizes;
+
     @OneToMany(mappedBy = "product")
     private List<Color> colors;
 

@@ -31,24 +31,15 @@ public class TokenProvider {
     public String generateToken(Authentication authentication) {
         Date createdDate = new Date();
         Date expiryDate = new Date(createdDate.getTime() + jwtExpirationInMs);
-        String token = Jwts.builder()
-                   .setSubject(authentication.getName())
-                   .setIssuedAt(new Date())
-                   .setExpiration(expiryDate)
-                   .signWith(SignatureAlgorithm.HS512, jwtSecretKey)
-                   .compact();
-        return token;
+        return Jwts.builder()
+                .setSubject(authentication.getName())
+                .setIssuedAt(new Date())
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512, jwtSecretKey)
+                .compact();
     }
 
     public String getUsernameFromJwt(String jwtString) {
-        Claims claims = Jwts.parser()
-                            .setSigningKey(jwtSecretKey)
-                            .parseClaimsJws(jwtString)
-                            .getBody();
-        return claims.getSubject();
-    }
-
-    public String getTokenFromBearerToken(String jwtString) {
         Claims claims = Jwts.parser()
                             .setSigningKey(jwtSecretKey)
                             .parseClaimsJws(jwtString)
