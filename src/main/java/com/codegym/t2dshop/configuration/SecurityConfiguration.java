@@ -70,12 +70,8 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         httpSecurity.authorizeHttpRequests(
-
-                
-
                 req -> req.requestMatchers("/api/**", "/api/auth/login", "/api/auth/logout", "/api/categories/**",
-                                            "/api/auth/register").permitAll());
-
+                        "/api/auth/register").permitAll());
 
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers("/api/roles/**").hasAnyRole("ADMIN"));

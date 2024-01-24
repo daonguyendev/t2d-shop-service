@@ -19,15 +19,17 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Integer price;
+    private Double price;
     private String description;
-    private int quantity;
+    private Integer quantity;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
     @OneToMany(mappedBy = "product")
-    private List<Size> sizes = new ArrayList<>();
+    private List<Size> sizes;
     @OneToMany(mappedBy = "product")
-    private List<Color> colors = new ArrayList<>();
+    private List<Color> colors;
+
+
 }
