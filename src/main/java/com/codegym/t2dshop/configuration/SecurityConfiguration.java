@@ -70,7 +70,7 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         httpSecurity.authorizeHttpRequests(
-                req -> req.requestMatchers("/api/**", "/api/auth/login", "/api/auth/logout", "/api/categories/**", "/api/categories/1/products",
+                req -> req.requestMatchers("/api/**", "/api/auth/login", "/api/auth/logout", "/api/categories/**",
                         "/api/auth/register").permitAll());
 
         httpSecurity.authorizeHttpRequests(
