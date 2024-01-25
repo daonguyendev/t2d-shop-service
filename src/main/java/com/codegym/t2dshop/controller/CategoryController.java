@@ -22,9 +22,6 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @Autowired
-    private ProductRepository productRepository;
-
     @GetMapping("/{id}/products")
     public ResponseEntity<?> getProductsByCategoryId(@PathVariable Long id) {
         Category category = categoryService.getCategoryById(id);
