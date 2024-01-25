@@ -18,14 +18,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
+
     @Autowired
     private CategoryService categoryService;
-
-    private final ProductRepository productRepository;
-
-    public CategoryController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     @GetMapping("/{id}/products")
     public ResponseEntity<?> getProductsByCategoryId(@PathVariable Long id) {
@@ -34,11 +29,6 @@ public class CategoryController {
             return new ResponseEntity<>(category, HttpStatus.OK);
         }
         return new ResponseEntity<>(category, HttpStatus.BAD_REQUEST);
-    }
-
-    @GetMapping("/products/{categoryId}")
-    public List<Product> findAllByCategoryId(@PathVariable Long categoryId) {
-        return productRepository.findAllByCategoryId(categoryId);
     }
 }
 

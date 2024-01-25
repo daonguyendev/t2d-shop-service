@@ -18,7 +18,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 
@@ -56,7 +56,7 @@ public class SecurityConfiguration {
     @Autowired
     public void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
         authManagerBuilder.userDetailsService(userDetailsService)
-                          .passwordEncoder(new BCryptPasswordEncoder());
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Bean
@@ -83,7 +83,7 @@ public class SecurityConfiguration {
 
         httpSecurity.rememberMe(req -> req.tokenRepository(new InMemoryTokenRepositoryImpl()));
 
-        httpSecurity.addFilterAfter(accessDeniedFilter, FilterSecurityInterceptor.class);
+        httpSecurity.addFilterAfter(accessDeniedFilter, AuthorizationFilter.class);
 
         return httpSecurity.build();
     }
